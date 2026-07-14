@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -z "${ASANA_MCP_CLIENT_ID:-}" ]]; then
+  export ASANA_MCP_CLIENT_ID="1216553766428589"
+fi
+
+if [[ -z "${ASANA_MCP_CLIENT_SECRET:-}" ]]; then
+  echo "ASANA_MCP_CLIENT_SECRET is not set." >&2
+  echo "Set it in your shell, then rerun: scripts/codex-asana" >&2
+  exit 1
+fi
+
+export ASANA_MCP_ACCESS_TOKEN
+ASANA_MCP_ACCESS_TOKEN="$(node scripts/asana-oauth.mjs print-access-token)"
+
+exec codex "$@"
