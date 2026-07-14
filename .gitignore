@@ -4,3 +4,4 @@
 !.env.example
 *.log
 error-state-source-of-truth.md
+connected-boards.md
